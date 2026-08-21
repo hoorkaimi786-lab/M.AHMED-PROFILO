@@ -27,3 +27,29 @@ body {
 .btn-glow:hover {
   box-shadow: 0 0 30px rgba(129, 140, 248, 0.5);
 }
+
+.skill-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  animation: shine 2.6s ease-in-out infinite;
+}
+
+@keyframes shine {
+  50%,
+  100% {
+    transform: translateX(220%);
+  }
+}

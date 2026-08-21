@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const profile = {
   name: "Muhammed Ahmed",
@@ -16,12 +16,12 @@ const profile = {
 };
 
 const skills = [
-  { name: "HTML & CSS", level: "95%" },
-  { name: "JavaScript", level: "90%" },
-  { name: "React.js", level: "92%" },
-  { name: "Next.js", level: "91%" },
-  { name: "Tailwind CSS", level: "92%" },
-  { name: "Node.js", level: "89%" },
+  { name: "HTML & CSS", level: 95, icon: "🎨" },
+  { name: "JavaScript", level: 90, icon: "⚡" },
+  { name: "React.js", level: 92, icon: "⚛️" },
+  { name: "Next.js", level: 91, icon: "🚀" },
+  { name: "Tailwind CSS", level: 92, icon: "🌊" },
+  { name: "Node.js", level: 89, icon: "🟢" },
 ];
 
 const projects = [
@@ -76,10 +76,88 @@ const projects = [
   },
 ];
 
+function useInView(ref) {
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return inView;
+}
+
+function Counter({ target, start }) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    const duration = 1500;
+    const t0 = performance.now();
+    let raf;
+    const tick = (now) => {
+      const p = Math.min((now - t0) / duration, 1);
+      setVal(Math.round(target * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [start, target]);
+  return <>{val}%</>;
+}
+
+function AnimatedBar({ value, delay, active }) {
+  return (
+    <div className="relative h-2.5 rounded-full bg-white/10 overflow-hidden">
+      <div
+        className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-cyan-300 shadow-[0_0_14px_rgba(34,211,238,0.55)] skill-shine"
+        style={{
+          width: active ? `${value}%` : "0%",
+          transition: `width 1.4s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+        }}
+      />
+    </div>
+  );
+}
+
+function SkillCard({ skill, index, active }) {
+  return (
+    <div
+      className={active ? "animate-fadeUp" : "opacity-0"}
+      style={{ animationDelay: `${index * 110}ms` }}
+    >
+      <div className="group glass rounded-2xl p-5 h-full hover:border-cyan-400/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300">
+        <div className="flex items-center justify-between mb-3">
+          <span className="flex items-center gap-2.5 text-sm font-semibold">
+            <span className="text-xl inline-block transition-transform duration-300 group-hover:scale-125 group-hover:rotate-6">
+              {skill.icon}
+            </span>
+            {skill.name}
+          </span>
+          <span className="text-sm font-bold text-cyan-400 tabular-nums">
+            <Counter target={skill.level} start={active} />
+          </span>
+        </div>
+        <AnimatedBar value={skill.level} delay={index * 130} active={active} />
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [sending, setSending] = useState(false);
+  const skillsRef = useRef(null);
+  const skillsVisible = useInView(skillsRef);
   const links = ["Home", "About", "Skills", "Projects", "Contact"];
 
   const handleSubmit = async (e) => {
@@ -293,24 +371,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="skills" className="max-w-4xl mx-auto px-6 py-24">
-        <h2 className="text-4xl font-bold text-center mb-12">
+      <section id="skills" ref={skillsRef} className="max-w-4xl mx-auto px-6 py-24">
+        <h2 className="text-4xl font-bold text-center mb-3">
           My <span className="gradient-text">Skills</span>
         </h2>
+        <p className="text-center text-gray-400 mb-12">
+          Technologies I work with daily 🛠️
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {skills.map((s) => (
-            <div key={s.name} className="glass rounded-2xl p-5">
-              <div className="flex justify-between mb-2 text-sm font-medium">
-                <span>{s.name}</span>
-                <span className="text-cyan-400">{s.level}</span>
-              </div>
-              <div className="h-2 rounded-full bg-white/10 overflow-hidden">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400"
-                  style={{ width: s.level }}
-                />
-              </div>
-            </div>
+          {skills.map((s, i) => (
+            <SkillCard key={s.name} skill={s} index={i} active={skillsVisible} />
           ))}
         </div>
       </section>
