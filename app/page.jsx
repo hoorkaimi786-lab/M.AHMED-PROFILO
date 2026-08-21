@@ -171,12 +171,61 @@ function SkillCard({ skill, index, active }) {
   );
 }
 
+const aboutSegments = [
+  { text: "I am", style: "" },
+  { text: "Muhammed Ahmed", style: "gradient-text font-bold" },
+  { text: ", a passionate", style: "" },
+  { text: "web developer", style: "text-cyan-300 font-semibold" },
+  {
+    text: "from Khipro, Sindh, Pakistan, who builds",
+    style: "",
+  },
+  { text: "modern websites", style: "text-cyan-300 font-semibold" },
+  {
+    text: "and web applications. My goal is to deliver the best user experience through",
+    style: "",
+  },
+  { text: "clean code", style: "text-indigo-300 font-semibold" },
+  { text: "and", style: "" },
+  { text: "stunning design", style: "text-purple-300 font-semibold" },
+];
+
+function AnimatedWords({ visible }) {
+  let i = 0;
+  return (
+    <>
+      {aboutSegments.map((seg, si) => (
+        <span key={si} className={seg.style}>
+          {seg.text.split(" ").map((w) => {
+            const delay = i++ * 35;
+            return (
+              <span
+                key={`${si}-${delay}`}
+                className={`inline-block transition-all duration-500 ${
+                  visible
+                    ? "opacity-100 translate-y-0 blur-0"
+                    : "opacity-0 translate-y-3 blur-[2px]"
+                }`}
+                style={{ transitionDelay: `${delay}ms` }}
+              >
+                {w}&nbsp;
+              </span>
+            );
+          })}
+        </span>
+      ))}
+    </>
+  );
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [sending, setSending] = useState(false);
   const skillsRef = useRef(null);
   const skillsVisible = useInView(skillsRef);
+  const aboutRef = useRef(null);
+  const aboutVisible = useInView(aboutRef);
   const links = ["Home", "About", "Skills", "Projects", "Contact"];
 
   const handleSubmit = async (e) => {
@@ -364,29 +413,18 @@ export default function Home() {
         <h2 className="text-4xl font-bold text-center mb-12">
           About <span className="gradient-text">Me</span>
         </h2>
-        <div className="glass rounded-3xl p-8 md:p-12 relative overflow-hidden">
+        <div
+          ref={aboutRef}
+          className="glass rounded-3xl p-8 md:p-12 relative overflow-hidden"
+        >
           <span className="absolute -top-4 left-4 text-[140px] leading-none text-cyan-400/10 select-none pointer-events-none font-serif">
             &ldquo;
           </span>
-          <p className="relative text-lg md:text-xl text-gray-300 leading-relaxed md:leading-loose mb-8 first-letter:text-7xl first-letter:font-black first-letter:text-transparent first-letter:bg-clip-text first-letter:bg-gradient-to-br first-letter:from-indigo-400 first-letter:to-cyan-400 first-letter:float-left first-letter:mr-3 first-letter:mt-2 first-letter:drop-shadow-[0_0_12px_rgba(34,211,238,0.4)]">
-            Assalam-o-Alaikum! I am{" "}
-            <span className="gradient-text font-bold">Muhammed Ahmed</span>, a
-            passionate{" "}
-            <span className="text-cyan-300 font-semibold">
-              web developer
-            </span>{" "}
-            from Khipro, Sindh, Pakistan, who builds{" "}
-            <span className="text-cyan-300 font-semibold">
-              modern websites
-            </span>{" "}
-            and web applications. My goal is to deliver the best user
-            experience through{" "}
-            <span className="text-indigo-300 font-semibold">clean code</span>{" "}
-            and{" "}
-            <span className="text-purple-300 font-semibold">
-              stunning design
-            </span>
-            .
+          <h3 className="relative font-display text-2xl md:text-3xl font-bold mb-5">
+            👋 <span className="gradient-text">Assalam-o-Alaikum!</span>
+          </h3>
+          <p className="relative text-lg md:text-xl text-gray-300 leading-relaxed md:leading-loose mb-8">
+            <AnimatedWords visible={aboutVisible} />
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
             <a
