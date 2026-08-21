@@ -88,7 +88,7 @@ export default function Home() {
     setSending(true);
     try {
       const res = await fetch(
-        "https://formsubmit.co/ajax/kaimkhani493@gmail.com",
+        "https://formsubmit.co/ajax/05fcd2759aca99b82bd3840d20e9fdbb",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
