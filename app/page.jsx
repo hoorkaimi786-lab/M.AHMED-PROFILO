@@ -173,7 +173,7 @@ function SkillCard({ skill, index, active }) {
 
 const aboutSegments = [
   { text: "I am", style: "" },
-  { text: "Muhammed Ahmed", name: true },
+  { text: "MUHAMMED AHMED", name: true },
   { text: ", a passionate", style: "" },
   { text: "web developer", style: "text-cyan-300 font-semibold" },
   {
@@ -211,13 +211,9 @@ function AnimatedWords({ visible }) {
           return (
             <span key={si} className="whitespace-nowrap">
               {wordAnim(
-                <>
-                  <span className="font-mono text-cyan-400">&lt;</span>
-                  <span className="gradient-text font-extrabold text-2xl md:text-3xl drop-shadow-[0_0_18px_rgba(34,211,238,0.35)]">
-                    {seg.text}
-                  </span>
-                  <span className="font-mono text-cyan-400">&nbsp;/&gt;</span>
-                </>
+                <span className="gradient-text font-extrabold text-2xl md:text-3xl tracking-wide drop-shadow-[0_0_18px_rgba(34,211,238,0.35)]">
+                  {seg.text}
+                </span>
               )}
               &nbsp;
             </span>
