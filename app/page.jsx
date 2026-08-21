@@ -413,12 +413,12 @@ export default function Home() {
         <div className="animate-float">
           <div className="w-64 h-64 md:w-80 md:h-80 rounded-full p-1 bg-gradient-to-tr from-indigo-500 via-cyan-400 to-purple-500">
             <Image
-              src="/profile.jpeg"
+              src="/pic-web.jpeg"
               alt={profile.name}
               width={320}
               height={320}
               priority
-              className="w-full h-full object-cover rounded-full"
+              className="w-full h-full object-cover object-[center_20%] rounded-full"
             />
           </div>
         </div>
