@@ -108,26 +108,30 @@ export default function Home() {
           </div>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-2xl"
+            className="md:hidden w-10 h-10 rounded-lg bg-white/10 border border-white/10 text-xl flex items-center justify-center hover:bg-white/20 transition"
             aria-label="Menu"
           >
-            ☰
+            {menuOpen ? "✕" : "☰"}
           </button>
         </div>
-        {menuOpen && (
-          <div className="md:hidden mx-4 mb-4 glass rounded-2xl flex flex-col items-center gap-4 py-5 animate-fadeUp">
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ${
+            menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="mx-4 mb-4 rounded-2xl bg-[#0d0d24]/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden">
             {links.map((l) => (
               <a
                 key={l}
                 href={`#${l.toLowerCase()}`}
                 onClick={() => setMenuOpen(false)}
-                className="text-gray-300 hover:text-cyan-400 font-medium"
+                className="block px-6 py-4 text-gray-200 font-medium border-b border-white/5 last:border-0 hover:bg-white/5 hover:text-cyan-400 active:bg-white/10 transition"
               >
                 {l}
               </a>
             ))}
           </div>
-        )}
+        </div>
       </nav>
 
       <section
