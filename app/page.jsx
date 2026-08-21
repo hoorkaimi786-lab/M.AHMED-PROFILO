@@ -690,7 +690,14 @@ export default function Home() {
               </li>
               <li className="flex items-start gap-2">
                 <span>📍</span>
-                {profile.location}
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Khipro,+Sindh,+Pakistan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-purple-300 transition"
+                >
+                  {profile.location}
+                </a>
               </li>
               <li>
                 <a
