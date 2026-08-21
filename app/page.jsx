@@ -11,8 +11,6 @@ const profile = {
   phone: "03153269527",
   whatsapp: "https://wa.me/923153269527",
   location: "Khipro, Sindh, Pakistan",
-  about:
-    "Assalam-o-Alaikum! I am Muhammed Ahmed, a passionate web developer from Khipro, Sindh, Pakistan, who builds modern websites and web applications. My goal is to deliver the best user experience through clean code and stunning design.",
 };
 
 const skills = [
@@ -367,9 +365,29 @@ export default function Home() {
         <h2 className="text-4xl font-bold text-center mb-12">
           About <span className="gradient-text">Me</span>
         </h2>
-        <div className="glass rounded-3xl p-8 md:p-12 text-center md:text-left">
-          <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            {profile.about}
+        <div className="glass rounded-3xl p-8 md:p-12 relative overflow-hidden">
+          <span className="absolute -top-4 left-4 text-[140px] leading-none text-cyan-400/10 select-none pointer-events-none font-serif">
+            &ldquo;
+          </span>
+          <p className="relative text-lg md:text-xl text-gray-300 leading-relaxed md:leading-loose mb-8 first-letter:text-7xl first-letter:font-black first-letter:text-transparent first-letter:bg-clip-text first-letter:bg-gradient-to-br first-letter:from-indigo-400 first-letter:to-cyan-400 first-letter:float-left first-letter:mr-3 first-letter:mt-2 first-letter:drop-shadow-[0_0_12px_rgba(34,211,238,0.4)]">
+            Assalam-o-Alaikum! I am{" "}
+            <span className="gradient-text font-bold">Muhammed Ahmed</span>, a
+            passionate{" "}
+            <span className="text-cyan-300 font-semibold">
+              web developer
+            </span>{" "}
+            from Khipro, Sindh, Pakistan, who builds{" "}
+            <span className="text-cyan-300 font-semibold">
+              modern websites
+            </span>{" "}
+            and web applications. My goal is to deliver the best user
+            experience through{" "}
+            <span className="text-indigo-300 font-semibold">clean code</span>{" "}
+            and{" "}
+            <span className="text-purple-300 font-semibold">
+              stunning design
+            </span>
+            .
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
             <a
