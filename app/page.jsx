@@ -81,6 +81,10 @@ function useInView(ref) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -88,7 +92,7 @@ function useInView(ref) {
           obs.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -116,12 +120,29 @@ function Counter({ target, start }) {
 
 function AnimatedBar({ value, delay, active }) {
   return (
-    <div className="relative h-2.5 rounded-full bg-white/10 overflow-hidden">
-      <div
-        className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-cyan-300 shadow-[0_0_14px_rgba(34,211,238,0.55)] skill-shine"
+    <div className="relative h-3">
+      <div className="absolute inset-0 rounded-full bg-black/40 border border-white/10 overflow-hidden">
+        {[25, 50, 75].map((t) => (
+          <span
+            key={t}
+            className="absolute top-0 bottom-0 w-px bg-white/15"
+            style={{ left: `${t}%` }}
+          />
+        ))}
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-cyan-300 shadow-[0_0_14px_rgba(34,211,238,0.55)] skill-shine"
+          style={{
+            width: active ? `${value}%` : "0%",
+            transition: `width 1.4s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+          }}
+        />
+      </div>
+      <span
+        className="absolute -top-1 h-5 w-1 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(34,211,238,0.9)] transition-all duration-1000"
         style={{
-          width: active ? `${value}%` : "0%",
-          transition: `width 1.4s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+          left: active ? `calc(${value}% - 2px)` : "-4px",
+          transitionDelay: `${delay + 400}ms`,
+          opacity: active ? 1 : 0,
         }}
       />
     </div>
