@@ -26,22 +26,53 @@ const skills = [
 
 const projects = [
   {
-    title: "E-Commerce Website",
-    desc: "Full featured online store with cart, payments and admin panel.",
-    tags: ["Next.js", "Tailwind", "MongoDB"],
-    emoji: "🛒",
+    title: "Ali Gamers",
+    desc: "Browser-based flying game with Easy/Medium/Hard modes, coin collection, shield power-ups and high score system.",
+    tags: ["JavaScript", "Game", "HTML5"],
+    emoji: "🎮",
+    link: "http://ali-gamers.vercel.app",
   },
   {
-    title: "Portfolio Website",
-    desc: "Modern responsive personal portfolio with smooth animations.",
-    tags: ["Next.js", "Tailwind"],
-    emoji: "💼",
+    title: "Broadway Kitchen & Grill",
+    desc: "Restaurant website with digital menu, cart system and direct WhatsApp ordering.",
+    tags: ["Restaurant", "Cart", "WhatsApp Orders"],
+    emoji: "🍕",
+    link: "http://broad-way-baba.vercel.app",
   },
   {
-    title: "Blog Platform",
-    desc: "SEO friendly blog with dark mode and markdown support.",
-    tags: ["React", "Node.js"],
-    emoji: "📝",
+    title: "Dua Restaurant",
+    desc: "Desi restaurant site from Khipro with menu, gallery, table booking and WhatsApp orders.",
+    tags: ["Restaurant", "Gallery", "Booking"],
+    emoji: "🍛",
+    link: "http://dua-restaurant-khipro.vercel.app",
+  },
+  {
+    title: "Age Calculator",
+    desc: "Finds exact age in years, months, days and minutes with date picker and manual input options.",
+    tags: ["JavaScript", "Date Logic", "UI"],
+    emoji: "🎂",
+    link: "http://age-calculater-omega.vercel.app",
+  },
+  {
+    title: "Smart Calculator",
+    desc: "Clean and fast web calculator with all basic operations and smooth button experience.",
+    tags: ["JavaScript", "Calculator", "App"],
+    emoji: "🧮",
+    link: "http://ali-calculater.vercel.app",
+  },
+  {
+    title: "ALI Quiz App",
+    desc: "Quiz app with Islamic, Maths and English categories — 3 difficulty levels, 90 questions total.",
+    tags: ["Quiz", "Categories", "Levels"],
+    emoji: "🧠",
+    link: "https://alikk-quiz.netlify.app",
+  },
+  {
+    title: "Earn Trading Platform",
+    desc: "Online trading platform with secure user login and account management system.",
+    tags: ["PHP", "Web App", "Auth"],
+    emoji: "📈",
+    link: "https://earntrading.click/login.php",
   },
 ];
 
@@ -290,14 +321,19 @@ export default function Home() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {projects.map((p) => (
-            <div
+            <a
               key={p.title}
-              className="glass rounded-3xl p-7 hover:-translate-y-2 hover:border-cyan-400/40 transition duration-300"
+              href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group glass rounded-3xl p-7 flex flex-col hover:-translate-y-2 hover:border-cyan-400/40 transition duration-300"
             >
               <div className="text-5xl mb-4">{p.emoji}</div>
-              <h3 className="text-xl font-bold mb-2">{p.title}</h3>
-              <p className="text-gray-400 text-sm mb-4">{p.desc}</p>
-              <div className="flex flex-wrap gap-2">
+              <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-300 transition">
+                {p.title}
+              </h3>
+              <p className="text-gray-400 text-sm mb-4 flex-1">{p.desc}</p>
+              <div className="flex flex-wrap gap-2 mb-5">
                 {p.tags.map((t) => (
                   <span
                     key={t}
@@ -307,7 +343,13 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-            </div>
+              <span className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-400">
+                Visit Site
+                <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                  ↗
+                </span>
+              </span>
+            </a>
           ))}
         </div>
       </section>
