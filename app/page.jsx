@@ -86,8 +86,8 @@ export default function Home() {
 
   return (
     <main className="relative overflow-x-hidden">
-      <div className="fixed top-0 -left-32 w-96 h-96 bg-indigo-600/30 rounded-full blur-3xl animate-blob" />
-      <div className="fixed top-1/3 -right-32 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-blob" />
+      <div className="fixed top-0 -left-32 w-96 h-96 bg-indigo-600/30 rounded-full blur-3xl animate-blob pointer-events-none" />
+      <div className="fixed top-1/3 -right-32 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-blob pointer-events-none" />
 
       <nav className="fixed top-0 left-0 w-full z-50 glass">
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
@@ -108,28 +108,84 @@ export default function Home() {
           </div>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden w-10 h-10 rounded-lg bg-white/10 border border-white/10 text-xl flex items-center justify-center hover:bg-white/20 transition"
+            className="md:hidden w-11 h-11 rounded-xl glass flex flex-col items-center justify-center gap-[5px] active:scale-90 transition"
             aria-label="Menu"
           >
-            {menuOpen ? "✕" : "☰"}
+            <span
+              className={`block w-5 h-[2px] rounded-full bg-gray-200 transition-all duration-300 ${
+                menuOpen ? "rotate-45 translate-y-[7px] bg-cyan-400" : ""
+              }`}
+            />
+            <span
+              className={`block w-5 h-[2px] rounded-full bg-gray-200 transition-all duration-300 ${
+                menuOpen ? "opacity-0 scale-x-0" : ""
+              }`}
+            />
+            <span
+              className={`block w-5 h-[2px] rounded-full bg-gray-200 transition-all duration-300 ${
+                menuOpen ? "-rotate-45 -translate-y-[7px] bg-cyan-400" : ""
+              }`}
+            />
           </button>
         </div>
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${
-            menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+            menuOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="mx-4 mb-4 rounded-2xl bg-[#0d0d24]/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden">
-            {links.map((l) => (
+          <div className="mx-4 mb-4 rounded-2xl bg-[#0b0b20]/95 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
+            {links.map((l, i) => (
               <a
                 key={l}
                 href={`#${l.toLowerCase()}`}
                 onClick={() => setMenuOpen(false)}
-                className="block px-6 py-4 text-gray-200 font-medium border-b border-white/5 last:border-0 hover:bg-white/5 hover:text-cyan-400 active:bg-white/10 transition"
+                style={{ transitionDelay: menuOpen ? `${i * 50}ms` : "0ms" }}
+                className={`group flex items-center justify-between px-6 py-4 font-medium border-b border-white/5 last:border-0 transition-all duration-300 ${
+                  menuOpen
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-4 opacity-0"
+                }`}
               >
-                {l}
+                <span className="flex items-center gap-3">
+                  <span className="text-xs font-bold text-cyan-400/70">
+                    0{i + 1}
+                  </span>
+                  <span className="text-gray-200 group-hover:text-cyan-400 group-active:text-cyan-400 transition">
+                    {l}
+                  </span>
+                </span>
+                <span className="text-cyan-400 opacity-40 group-hover:opacity-100 group-active:opacity-100 transition">
+                  ›
+                </span>
               </a>
             ))}
+            <div className="flex justify-center gap-3 py-4 border-t border-white/10 bg-white/[0.03]">
+              <a
+                href={profile.whatsapp}
+                target="_blank"
+                aria-label="WhatsApp"
+                title="WhatsApp"
+                className="w-9 h-9 rounded-full glass flex items-center justify-center hover:bg-green-500/20 hover:text-green-400 active:scale-90 transition"
+              >
+                💬
+              </a>
+              <a
+                href={`mailto:${profile.email}`}
+                aria-label="Email"
+                title="Email"
+                className="w-9 h-9 rounded-full glass flex items-center justify-center hover:bg-indigo-500/20 hover:text-indigo-300 active:scale-90 transition"
+              >
+                📧
+              </a>
+              <a
+                href={`tel:${profile.phone}`}
+                aria-label="Phone"
+                title="Call"
+                className="w-9 h-9 rounded-full glass flex items-center justify-center hover:bg-cyan-500/20 hover:text-cyan-400 active:scale-90 transition"
+              >
+                📞
+              </a>
+            </div>
           </div>
         </div>
       </nav>
