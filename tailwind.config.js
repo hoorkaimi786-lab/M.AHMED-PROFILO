@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["var(--font-poppins)", "sans-serif"],
+        display: ["var(--font-playfair)", "serif"],
       },
       animation: {
         float: "float 6s ease-in-out infinite",
