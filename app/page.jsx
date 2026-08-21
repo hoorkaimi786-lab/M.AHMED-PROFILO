@@ -351,22 +351,44 @@ export default function Home() {
             {profile.about}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-            <div className="glass rounded-xl p-4">
-              <span className="text-cyan-400 block mb-1">📧 Email</span>
-              <a href={`mailto:${profile.email}`} className="hover:text-cyan-300 break-all">
+            <a
+              href={`mailto:${profile.email}`}
+              className="group glass rounded-xl p-5 flex flex-col items-center text-center gap-2 hover:border-cyan-400/50 hover:bg-white/[0.07] hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-500/15 transition-all duration-300"
+            >
+              <span className="w-11 h-11 rounded-full bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center text-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.45)]">
+                📧
+              </span>
+              <span className="text-cyan-400 font-semibold">Email</span>
+              <span className="text-gray-300 break-all group-hover:text-cyan-200 transition">
                 {profile.email}
-              </a>
-            </div>
-            <div className="glass rounded-xl p-4">
-              <span className="text-cyan-400 block mb-1">📞 Phone</span>
-              <a href={`tel:${profile.phone}`} className="hover:text-cyan-300">
+              </span>
+            </a>
+            <a
+              href={`tel:${profile.phone}`}
+              className="group glass rounded-xl p-5 flex flex-col items-center text-center gap-2 hover:border-green-400/50 hover:bg-white/[0.07] hover:-translate-y-2 hover:shadow-xl hover:shadow-green-500/15 transition-all duration-300"
+            >
+              <span className="w-11 h-11 rounded-full bg-green-400/10 border border-green-400/20 flex items-center justify-center text-xl transition-all duration-300 group-hover:scale-110 group-hover:-rotate-6 group-hover:shadow-[0_0_20px_rgba(74,222,128,0.45)]">
+                📞
+              </span>
+              <span className="text-green-400 font-semibold">Phone</span>
+              <span className="text-gray-300 group-hover:text-green-200 transition">
                 {profile.phone}
-              </a>
-            </div>
-            <div className="glass rounded-xl p-4">
-              <span className="text-cyan-400 block mb-1">📍 Location</span>
-              {profile.location}
-            </div>
+              </span>
+            </a>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Khipro,+Sindh,+Pakistan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group glass rounded-xl p-5 flex flex-col items-center text-center gap-2 hover:border-purple-400/50 hover:bg-white/[0.07] hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-500/15 transition-all duration-300"
+            >
+              <span className="w-11 h-11 rounded-full bg-purple-400/10 border border-purple-400/20 flex items-center justify-center text-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_20px_rgba(192,132,252,0.45)]">
+                📍
+              </span>
+              <span className="text-purple-400 font-semibold">Location</span>
+              <span className="text-gray-300 group-hover:text-purple-200 transition">
+                {profile.location}
+              </span>
+            </a>
           </div>
         </div>
       </section>
