@@ -419,7 +419,7 @@ export default function Home() {
                 width={320}
                 height={320}
                 priority
-                className="w-full h-full object-cover object-top origin-bottom scale-[1.3] rounded-full"
+                className="w-full h-full object-cover object-[center_top] rounded-full"
               />
             </div>
           </div>
