@@ -221,7 +221,6 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
           <a href="#home" className="text-xl font-bold gradient-text">
             {profile.name}
-            <span className="text-cyan-400">.</span>
           </a>
           <div className="hidden md:flex gap-8">
             {links.map((l) => (
@@ -559,7 +558,6 @@ export default function Home() {
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold gradient-text mb-3">
               {profile.name}
-              <span className="text-cyan-400">.</span>
             </h3>
             <p className="text-gray-400 leading-relaxed max-w-sm mb-6">
               Passionate web developer crafting modern, fast and beautiful
