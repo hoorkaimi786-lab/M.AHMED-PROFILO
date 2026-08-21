@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import ChatBot from "../components/ChatBot";
 
 const profile = {
   name: "Muhammed Ahmed",
@@ -718,6 +719,8 @@ export default function Home() {
           <p>Built with Next.js &amp; Tailwind CSS</p>
         </div>
       </footer>
+
+      <ChatBot />
 
       {showPopup && (
         <div
