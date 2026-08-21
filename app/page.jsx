@@ -173,7 +173,7 @@ function SkillCard({ skill, index, active }) {
 
 const aboutSegments = [
   { text: "I am", style: "" },
-  { text: "Muhammed Ahmed", style: "gradient-text font-bold" },
+  { text: "Muhammed Ahmed", name: true },
   { text: ", a passionate", style: "" },
   { text: "web developer", style: "text-cyan-300 font-semibold" },
   {
@@ -192,28 +192,43 @@ const aboutSegments = [
 
 function AnimatedWords({ visible }) {
   let i = 0;
+  const wordAnim = (extra) => (
+    <span
+      className={`inline-block transition-all duration-500 ${
+        visible
+          ? "opacity-100 translate-y-0 blur-0"
+          : "opacity-0 translate-y-3 blur-[2px]"
+      }`}
+      style={{ transitionDelay: `${i++ * 35}ms` }}
+    >
+      {extra}
+    </span>
+  );
   return (
     <>
-      {aboutSegments.map((seg, si) => (
-        <span key={si} className={seg.style}>
-          {seg.text.split(" ").map((w) => {
-            const delay = i++ * 35;
-            return (
-              <span
-                key={`${si}-${delay}`}
-                className={`inline-block transition-all duration-500 ${
-                  visible
-                    ? "opacity-100 translate-y-0 blur-0"
-                    : "opacity-0 translate-y-3 blur-[2px]"
-                }`}
-                style={{ transitionDelay: `${delay}ms` }}
-              >
-                {w}&nbsp;
-              </span>
-            );
-          })}
-        </span>
-      ))}
+      {aboutSegments.map((seg, si) => {
+        if (seg.name) {
+          return (
+            <span key={si} className="whitespace-nowrap">
+              {wordAnim(
+                <>
+                  <span className="font-mono text-cyan-400">&lt;</span>
+                  <span className="gradient-text font-extrabold text-2xl md:text-3xl drop-shadow-[0_0_18px_rgba(34,211,238,0.35)]">
+                    {seg.text}
+                  </span>
+                  <span className="font-mono text-cyan-400">&nbsp;/&gt;</span>
+                </>
+              )}
+              &nbsp;
+            </span>
+          );
+        }
+        return (
+          <span key={si} className={seg.style}>
+            {seg.text.split(" ").map((w) => wordAnim(`${w}\u00A0`))}
+          </span>
+        );
+      })}
     </>
   );
 }
