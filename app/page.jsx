@@ -50,14 +50,14 @@ const projects = [
     title: "Age Calculator",
     desc: "Finds exact age in years, months, days and minutes with date picker and manual input options.",
     tags: ["JavaScript", "Date Logic", "UI"],
-    emoji: "🎂",
+    emoji: "⏳",
     link: "http://age-calculater-omega.vercel.app",
   },
   {
     title: "Smart Calculator",
     desc: "Clean and fast web calculator with all basic operations and smooth button experience.",
     tags: ["JavaScript", "Calculator", "App"],
-    emoji: "🧮",
+    emoji: "🔢",
     link: "http://ali-calculater.vercel.app",
   },
   {
