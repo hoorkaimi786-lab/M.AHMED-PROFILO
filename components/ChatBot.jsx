@@ -28,7 +28,10 @@ export default function ChatBot() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({
+          message: text,
+          history: messages.slice(1).map(({ role, text: t }) => ({ role, text: t })),
+        }),
       });
       const data = await res.json();
       setMessages((m) => [...m, { role: "bot", text: data.reply }]);
