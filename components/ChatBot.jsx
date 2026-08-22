@@ -7,7 +7,7 @@ export default function ChatBot() {
   const [messages, setMessages] = useState([
     {
       role: "bot",
-      text: "Assalam-o-Alaikum! 👋 Main Ahmed ka AI assistant hoon. Ahmed ke skills, projects ya contact ke baare mein kuch poochein!",
+      text: "Assalam-o-Alaikum! 👋 Main M.AHMED ka AI assistant hoon. M.AHMED ke skills, projects ya contact ke baare mein kuch poochein!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -56,18 +56,18 @@ export default function ChatBot() {
       </button>
 
       <div
-        className={`fixed bottom-24 right-6 z-[90] w-[350px] max-w-[calc(100vw-3rem)] transition-all duration-300 origin-bottom-right ${
+        className={`fixed bottom-24 left-3 right-3 sm:left-auto sm:right-6 sm:w-[350px] z-[90] transition-all duration-300 origin-bottom-right ${
           open ? "scale-100 opacity-100" : "scale-90 opacity-0 pointer-events-none"
         }`}
       >
-        <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/60 bg-[#0b0b20]/95 backdrop-blur-xl flex flex-col h-[480px] max-h-[70vh]">
+        <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/60 bg-[#0b0b20]/95 backdrop-blur-xl flex flex-col h-[480px] max-h-[70dvh] sm:max-h-[80vh]">
           <div className="px-5 py-4 bg-gradient-to-r from-indigo-600/80 to-cyan-600/80 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center text-lg">
                 🤖
               </div>
               <div>
-                <p className="font-bold text-sm">Ahmed AI Assistant</p>
+                <p className="font-bold text-sm">M.AHMED AI Assistant</p>
                 <p className="text-xs text-cyan-200 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block animate-pulse"></span>
                   Online
@@ -83,7 +83,7 @@ export default function ChatBot() {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+          <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4 space-y-3">
             {messages.map((m, i) => (
               <div
                 key={i}
@@ -116,18 +116,20 @@ export default function ChatBot() {
             <div ref={endRef} />
           </div>
 
-          <div className="p-3 border-t border-white/10 flex gap-2">
+          <div className="shrink-0 p-3 border-t border-white/10 flex gap-2 items-center">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && send()}
               placeholder="Apna sawal likhein..."
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-cyan-400 placeholder:text-gray-500"
+              enterKeyHint="send"
+              className="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-base sm:text-sm outline-none focus:border-cyan-400 placeholder:text-gray-500"
             />
             <button
               onClick={send}
               disabled={loading || !input.trim()}
-              className="w-11 h-11 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 flex items-center justify-center disabled:opacity-50 hover:opacity-90 active:scale-95 transition"
+              type="button"
+              className="shrink-0 w-11 h-11 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 flex items-center justify-center disabled:opacity-50 hover:opacity-90 active:scale-95 transition"
               aria-label="Send message"
             >
               ➤

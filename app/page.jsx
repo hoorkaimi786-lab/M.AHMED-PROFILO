@@ -411,7 +411,7 @@ export default function Home() {
           <div className="w-64 h-64 md:w-80 md:h-80 rounded-full p-1.5 bg-gradient-to-tr from-blue-600 via-cyan-400 to-blue-500 shadow-[0_0_40px_rgba(59,130,246,0.35)]">
             <div className="w-full h-full rounded-full overflow-hidden">
               <Image
-                src="/profile-crop.jpg"
+                src="/PIC-PP.jpeg"
                 alt={profile.name}
                 width={320}
                 height={320}
